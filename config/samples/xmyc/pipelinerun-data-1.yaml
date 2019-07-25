@@ -1,0 +1,10 @@
+apiVersion: controller.ljchen.net/v1
+kind: PipelineRun
+metadata:
+  name: xmyc-settlment
+  finalizers:
+    - finalizer.ljchen.net
+spec:
+  refPipeline: xmyc-settlment
+  maxRetryCount: 1
+  #timeout: "30s"

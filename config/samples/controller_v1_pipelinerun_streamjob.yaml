@@ -1,0 +1,10 @@
+apiVersion: controller.ljchen.net/v1
+kind: PipelineRun
+metadata:
+  name: pipelinerun-2
+  finalizers:
+    - finalizer.ljchen.net
+spec:
+  refPipeline: pipeline-test-2
+  maxRetryCount: 2
+  timeout: "30s"

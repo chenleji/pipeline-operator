@@ -1,0 +1,25 @@
+apiVersion: controller.ljchen.net/v1
+kind: Pipeline
+metadata:
+  name: pipeline-test-2
+  finalizers:
+    - finalizer.ljchen.net
+spec:
+  # Add fields here
+  streamJob:
+    microServices:
+      - name: micro-service-1
+        replicas: 1
+        spec:
+          containers:
+            - name: nginx-1
+              image: nginx
+      - name: micro-service-2
+        replicas: 1
+        spec:
+          containers:
+            - name: nginx-2
+              image: nginx
+  strategy:
+    expire: "2019-07-15 15:22:00"
+    cronExpression: "0/1 * * * *"

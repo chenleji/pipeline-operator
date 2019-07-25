@@ -1,0 +1,41 @@
+apiVersion: controller.ljchen.net/v1
+kind: Pipeline
+metadata:
+  name: pipeline-test-1
+  finalizers:
+    - finalizer.ljchen.net
+spec:
+  # Add fields here
+  batchJob:
+    input:
+      elasticSearch:
+        index: xmtc_stock_test
+        topic: xmtc_stock_test3
+        es-address: http://10.0.66.60:9200
+    outputs:
+      - name: "output-ftp"
+        ftp:
+          bootstrap: kfk-test-elk01.ljchen.net:9092
+          filename: test
+          filetype: zip
+          topic: topic-ddx-xmtc
+      - name: "output-api"
+        api:
+          bootstrap: kfk-test-elk01.ljchen.net:9092
+          filename: test
+          filetype: zip
+          topic: topic-ddx-xmtc
+      - name: "output-kafka"
+        kafka:
+          bootstrap: kfk-test-elk01.ljchen.net:9092
+          tobootstrap: kfk-test-elk01.ljchen.net:9092
+          totopic: lys-test
+          topic: topic-ddx-xmtc
+      - name: "output-smtp"
+        email:
+          smtpserver: smtp.163.com
+          smtpuser: daofeng1987x@163.com
+          smtppassword: 1qaz2wsx
+  strategy:
+    #cronExpression: "0/5 * * * *"
+    expire: "2019-07-15 19:55:00"

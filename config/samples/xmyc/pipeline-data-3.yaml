@@ -1,0 +1,23 @@
+apiVersion: controller.ljchen.net/v1
+kind: Pipeline
+metadata:
+  name: xmyc-stock
+  finalizers:
+    - finalizer.ljchen.net
+spec:
+  # Add fields here
+  batchJob:
+    input:
+      elasticSearch:
+        index: xmtc_stock_test
+        topic: xmtc_stock_test
+        es-address: http://10.0.66.60:9200
+    outputs:
+      - name: "webserver"
+        custom:
+          image: registry.ljchen.net/ieyes/adapter4xmtc:0.1
+          topic:  xmtc_stock_test
+          target: stock
+  strategy:
+    cronExpression: "*/60 * * * *"
+    expire: "2019-07-18 15:00:00"

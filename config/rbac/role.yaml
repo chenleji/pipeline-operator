@@ -1,0 +1,164 @@
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: null
+  name: manager-role
+rules:
+  - apiGroups:
+      - controller.ljchen.net
+    resources:
+      - pipelines
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+  - apiGroups:
+      - controller.ljchen.net
+    resources:
+      - pipelines/status
+    verbs:
+      - get
+      - update
+      - patch
+  - apiGroups:
+      - controller.ljchen.net
+    resources:
+      - pipelineruns
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+  - apiGroups:
+      - controller.ljchen.net
+    resources:
+      - pipelineruns/status
+    verbs:
+      - get
+      - update
+      - patch
+  - apiGroups:
+      - apps
+    resources:
+      - deployments
+    verbs:
+      - get
+      - list
+      - create
+      - update
+      - delete
+      - patch
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+      - services
+      - endpoints
+      - namespaces
+      - secrets
+      - events
+      - serviceaccounts
+      - configmaps
+    verbs:
+      - get
+      - list
+      - create
+      - update
+      - delete
+      - patch
+      - watch
+  - apiGroups:
+      - extensions
+    resources:
+      - deployments
+    verbs:
+      - get
+      - list
+      - create
+      - update
+      - delete
+      - patch
+      - watch
+  - apiGroups:
+      - admissionregistration.k8s.io
+    resources:
+      - mutatingwebhookconfigurations
+    verbs:
+      - get
+      - list
+      - create
+      - update
+      - delete
+      - patch
+      - watch
+  - apiGroups:
+      - apiextensions.k8s.io
+    resources:
+      - customresourcedefinitions
+    verbs:
+      - get
+      - list
+      - create
+      - update
+      - delete
+      - patch
+      - watch
+  - apiGroups:
+      - build.knative.dev
+    resources:
+      - builds
+      - buildtemplates
+      - clusterbuildtemplates
+    verbs:
+      - get
+      - list
+      - create
+      - update
+      - delete
+      - patch
+      - watch
+  - apiGroups:
+      - build.knative.dev
+    resources:
+      - builds/status
+      - buildtemplates/status
+      - clusterbuildtemplates/status
+    verbs:
+      - get
+      - list
+      - create
+      - update
+      - delete
+      - patch
+      - watch
+  - apiGroups:
+      - caching.internal.knative.dev
+    resources:
+      - images
+    verbs:
+      - get
+      - list
+      - create
+      - update
+      - delete
+      - deletecollection
+      - patch
+      - watch
+  - apiGroups:
+      - policy
+    resourceNames:
+      - knative-build
+    resources:
+      - podsecuritypolicies
+    verbs:
+      - use

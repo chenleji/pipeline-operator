@@ -1,0 +1,23 @@
+apiVersion: controller.ljchen.net/v1
+kind: Pipeline
+metadata:
+  name: xmyc-sale
+  finalizers:
+    - finalizer.ljchen.net
+spec:
+  # Add fields here
+  batchJob:
+    input:
+      elasticSearch:
+        index: vendor_xmyc_tms_retail_and_detail
+        topic: vendor_xmyc_tms_retail_and_detail
+        es-address: http://10.251.76.45:9200
+    outputs:
+      - name: "webserver"
+        custom:
+          image: registry.ljchen.net/ieyes/adapter4xmtc:0.1
+          topic:  vendor_xmyc_tms_retail_and_detail
+          target: sale
+  strategy:
+    cronExpression: "*/60 * * * *"
+    expire: "2019-07-18 15:00:00"

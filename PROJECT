@@ -1,0 +1,10 @@
+version: "2"
+domain: ljchen.net
+repo: github.com/chenleji/pipeline-operator
+resources:
+- group: controller
+  version: v1
+  kind: Pipeline
+- group: controller
+  version: v1
+  kind: PipelineRun

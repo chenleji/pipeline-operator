@@ -1,0 +1,24 @@
+apiVersion: controller.ljchen.net/v1
+kind: Pipeline
+metadata:
+  name: xmyc-settlment
+  finalizers:
+    - finalizer.ljchen.net
+spec:
+  # Add fields here
+  batchJob:
+    input:
+      elasticSearch:
+        index: vendor_xmyc_tms_checkout_detail
+        topic: vendor_xmyc_tms_checkout_detail
+        filter-date: sdt
+        es-address: http://10.251.76.43:9200,http://10.251.76.30:9200,http://10.251.76.45:9200
+    outputs:
+      - name: "webserver"
+        custom:
+          image: registry.ljchen.net/ieyes/adapter4xmtc:0.1
+          topic: vendor_xmyc_tms_checkout_detail
+          target: settlment
+  strategy:
+    cronExpression: "*/60 * * * *"
+    expire: "2019-07-18 15:00:00"

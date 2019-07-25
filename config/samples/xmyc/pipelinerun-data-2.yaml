@@ -1,0 +1,10 @@
+apiVersion: controller.ljchen.net/v1
+kind: PipelineRun
+metadata:
+  name: xmyc-sale
+  finalizers:
+    - finalizer.ljchen.net
+spec:
+  refPipeline: xmyc-sale
+  maxRetryCount: 1
+  #timeout: "30s"
